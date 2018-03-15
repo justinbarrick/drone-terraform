@@ -3,11 +3,11 @@
 PLAN_OUTPUT="${PLUGIN_TERRAFORM_PLAN_OUTPUT:-terraform.plan}"
 
 function slack_notify {
-    MESSAGE=$(terraform show -no-color $PLAN_OUTPUT |grep -v '^ ')
+    MESSAGE="$(terraform show -no-color $PLAN_OUTPUT |sed 's/^ \+//g')"
 
-    ADDITIONS=$(echo $MESSAGE |grep -cE "^[+] ")
-    CHANGES=$(echo $MESSAGE |grep -cE "^[+-]/[-+] ")
-    DESTROYED=$(echo $MESSAGE |grep -cE "^[-] ")
+    ADDITIONS=$(echo "$MESSAGE" |grep -cE "^[+] ")
+    CHANGES=$(echo "$MESSAGE" |grep -cE "^[+-]/[-+] ")
+    DESTROYED=$(echo "$MESSAGE" |grep -cE "^[-] ")
 
     if [ ${DESTROYED:-0} -gt 0 ]; then
         COLOR="#db1515"
@@ -20,7 +20,7 @@ function slack_notify {
         MESSAGE="No changes detected!"
     fi
 
-    curl -so /dev/null "$PLUGIN_SLACK_URL" --data "$(echo $MESSAGE |jq -Rs --arg apply "$PLUGIN_APPLY" --arg drone_build "$DRONE_BUILD_LINK" --arg color "$COLOR" \
+    curl -so /dev/null "$PLUGIN_SLACK_URL" --data "$(echo "$MESSAGE" |jq -Rs --arg apply "$PLUGIN_APPLY" --arg drone_build "$DRONE_BUILD_LINK" --arg color "$COLOR" \
       --arg add ${ADDITIONS:-0} --arg rm ${DESTROYED:-0} --arg changed ${CHANGES:-0} '{
         "channel":"#kubernetes",
         "icon_emoji": ":terraform:",
