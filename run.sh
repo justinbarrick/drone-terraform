@@ -41,6 +41,11 @@ if [ ! -z "$PLUGIN_ROOT" ]; then
 fi
 
 if [ "$PLUGIN_APPLY" == "true" ]; then
+    if [ ! -f "${PLAN_OUTPUT}" ]; then
+        echo "No plan!"
+        exit
+    fi
+
     set -e
     terraform apply -input=false "${PLAN_OUTPUT}" ${PLUGIN_TERRAFORM_ARGS:-}
     set +e
