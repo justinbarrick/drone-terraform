@@ -42,7 +42,7 @@ fi
 
 if [ "$PLUGIN_APPLY" == "true" ]; then
     if [ ! -f "${PLAN_OUTPUT}" ]; then
-        echo "No plan!"
+        echo "Exiting due to missing plan!"
         exit
     fi
 
