@@ -3,7 +3,7 @@ version: '2.1'
 services:
   docker:
     image: plugins/docker
-    env:
+    environment:
       - BUILDKITE_BRANCH
       - BUILDKITE_COMMIT
       - PLUGIN_REPO
