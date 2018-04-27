@@ -1,0 +1,12 @@
+version: '2.1'
+
+services:
+  docker:
+    image: plugins/docker
+    env:
+      - BUILDKITE_BRANCH
+      - BUILDKITE_COMMIT
+      - PLUGIN_REPO
+      - PLUGIN_TAGS
+      - DOCKER_USERNAME
+      - DOCKER_PASSWORD
