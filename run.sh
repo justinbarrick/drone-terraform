@@ -58,7 +58,6 @@ else
 
     if [ $EXIT_STATUS -eq 0 ]; then
         echo "No changes detected, reseting plan output."
-        git checkout "${PLAN_OUTPUT}"
     elif [ $EXIT_STATUS -eq 2 ]; then
         echo "Changes detected."
     else
@@ -67,4 +66,8 @@ else
     fi
 
     slack_notify
+
+    if [ $EXIT_STATUS -eq 0 ]; then
+        git checkout "${PLAN_OUTPUT}"
+    fi
 fi
