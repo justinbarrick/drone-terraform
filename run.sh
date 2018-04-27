@@ -51,7 +51,7 @@ if [ "$PLUGIN_APPLY" == "true" ]; then
     set +e
 
     slack_notify
-    rm "${PLAN_OUTPUT}"
+    git checkout "${PLAN_OUTPUT}"
 else
     terraform plan -input=false -out="${PLAN_OUTPUT}" -detailed-exitcode ${PLUGIN_TERRAFORM_ARGS:-}
     EXIT_STATUS=${PIPESTATUS[0]}
