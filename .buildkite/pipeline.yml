@@ -5,4 +5,6 @@ steps:
         image: plugins/docker
         environment:
           - PLUGIN_REPO=justinbarrick/drone-terraform
-          - PLUGIN_TAGS=latest       
+          - PLUGIN_TAGS=latest
+          - DOCKER_USERNAME
+          - DOCKER_PASSWORD
