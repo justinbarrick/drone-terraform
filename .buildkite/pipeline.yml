@@ -1,13 +1,8 @@
 steps:
   - name: "Docker Build"
     plugins:
-      docker-compose#v2.1.0:
-        run: docker
-        config: .buildkite/docker-compose.yml
-        env:
-          - BUILDKITE_BRANCH
-          - BUILDKITE_COMMIT
-          - DOCKER_USERNAME
-          - DOCKER_PASSWORD
+      docker#v1.1.1:
+        image: plugins/docker
+        environment:
           - PLUGIN_REPO=justinbarrick/drone-terraform
           - PLUGIN_TAGS=latest       
