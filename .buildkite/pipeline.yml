@@ -7,5 +7,7 @@ steps:
         env:
           - BUILDKITE_BRANCH
           - BUILDKITE_COMMIT
+          - DOCKER_USERNAME
+          - DOCKER_PASSWORD
           - PLUGIN_REPO=justinbarrick/drone-terraform
           - PLUGIN_TAGS=latest       
