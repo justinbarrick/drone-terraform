@@ -6,7 +6,7 @@ Allowed variables:
 * `apply`: if true, apply the changes, otherwise just plan.
 * `slack_url`: Slack URL to submit Terraform summary to.
 
-Example `.drone.yml`, with recommended branching flow using [drone-git-push](https://github.com/appleboy/drone-git-push) to manage the state:
+Example `.drone.yml` with recommended branching flow using [drone-git-push](https://github.com/appleboy/drone-git-push) to manage the state:
 
 ```
 pipeline:
