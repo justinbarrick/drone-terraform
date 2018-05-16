@@ -6,7 +6,7 @@ function slack_notify {
     MESSAGE="$(terraform show -no-color $PLAN_OUTPUT |sed 's/^ \+//g')"
 
     ADDITIONS=$(echo "$MESSAGE" |grep -cE "^[+] ")
-    CHANGES=$(echo "$MESSAGE" |grep -cE "^[+-]/[-+] ")
+    CHANGES=$(echo "$MESSAGE" |grep -cE "^([+-]/[-+]|[~]) ")
     DESTROYED=$(echo "$MESSAGE" |grep -cE "^[-] ")
 
     if [ ${DESTROYED:-0} -gt 0 ]; then
